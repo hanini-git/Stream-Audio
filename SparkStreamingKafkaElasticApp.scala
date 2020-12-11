@@ -39,7 +39,6 @@ object SparkStreamingKafkaElasticApp {
     val lines=stream.map(x=>x.value())
     val words = lines.flatMap(_.split(" "))
 
-    // not necessary since Spark 1.3
     // Count each word in each batch
     val pairs = words.map(word => (word, 1))
     val wordCounts = pairs.reduceByKey(_ + _).map(x=>Words(x._1,x._2))
